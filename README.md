@@ -117,6 +117,14 @@ sudo python3 setup.py develop
 - You can evaluate the performance of our models or models trained by yourself.
 
 - Our models are at <https://github.com/megvii-research/mdistiller/releases/tag/checkpoints>, please download the checkpoints to `./download_ckpts`
+```bash
+mkdir -p download_ckpts
+cd download_ckpts
+wget https://github.com/megvii-research/mdistiller/releases/download/checkpoints/cifar_teachers.tar
+tar xvf cifar_teachers.tar
+wget https://github.com/megvii-research/mdistiller/releases/download/checkpoints/dkd_resnet8x4
+
+```
 
 - If test the models on ImageNet, please download the dataset at <https://image-net.org/> and put them to `./data/imagenet`
 
@@ -126,9 +134,9 @@ sudo python3 setup.py develop
   python3 tools/eval.py -m ResNet34 -d imagenet # ResNet34 on imagenet
   
   # evaluate students
-  python3 tools/eval.p -m resnet8x4 -c download_ckpts/dkd_resnet8x4 # dkd-resnet8x4 on cifar100
-  python3 tools/eval.p -m MobileNetV1 -c download_ckpts/imgnet_dkd_mv1 -d imagenet # dkd-mv1 on imagenet
-  python3 tools/eval.p -m model_name -c output/your_exp/student_best # your checkpoints
+  python3 tools/eval.py -m resnet8x4 -c download_ckpts/dkd_resnet8x4 # dkd-resnet8x4 on cifar100
+  python3 tools/eval.py -m MobileNetV1 -c download_ckpts/imgnet_dkd_mv1 -d imagenet # dkd-mv1 on imagenet
+  python3 tools/eval.py -m model_name -c output/your_exp/student_best # your checkpoints
   ```
 
 
