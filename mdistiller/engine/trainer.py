@@ -30,7 +30,10 @@ class BaseTrainer(object):
 
         username = getpass.getuser()
         # init loggers
-        self.log_path = os.path.join(cfg.LOG.PREFIX, experiment_name)
+        timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+        job_id = os.environ.get('SLURM_JOB_ID', '0') 
+        proc_id = os.environ.get('SLURM_PROCID', '0')
+        self.log_path = os.path.join(cfg.LOG.PREFIX, f"{experiment_name}_{timestamp}_{job_id}_{proc_id}")
         if not os.path.exists(self.log_path):
             os.makedirs(self.log_path)
         self.tf_writer = SummaryWriter(os.path.join(self.log_path, "train.events"))
